@@ -1,15 +1,19 @@
-// import { useState } from "react";
-import "./App.css";
-import Home from "./pages/admin/dashboard/Home";
+import { Routes, Route } from "react-router-dom";
+
+import Login from "./pages/client/login/Login";
+// import Home from "./pages/admin/dashboard/Home";
+import Register from "./pages/client/login/Register";
+import Home from "./pages/client/home/Home";
 
 function App() {
   return (
-    <>
-      <Home />
-      <div className="bg-red-500 text-white text-center p-5">
-        Nếu thấy nền đỏ thì Tailwind đã hoạt động!
-      </div>
-    </>
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+
+      <Route path="/*" element={<Home />} />
+      <Route path="/" element={<Home />} />
+    </Routes>
   );
 }
 

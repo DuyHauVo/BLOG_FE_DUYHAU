@@ -1,9 +1,13 @@
+import Admin_routes from "../../../routers/admin.router/Admin_routes";
 import Header from "../layouts/Header";
 
 function Home() {
   return (
     <div>
-      <Header /> <h1>home</h1>
+      <Header />
+      <div className="p-5 rounded-md">
+        <Admin_routes />
+      </div>
     </div>
   );
 }
