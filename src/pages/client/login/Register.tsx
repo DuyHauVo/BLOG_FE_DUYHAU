@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 
 function Register() {
+
+  
   return (
     <>
       <section className="bg-gray-100 min-h-screen flex box-border justify-center items-center">
@@ -108,7 +110,7 @@ function Register() {
               <p className="mr-3 md:mr-0 ">If you don't have an account..</p>
 
               <Link
-                to={"/"}
+                to={"/login"}
                 className=" register text-white bg-[#002D74] hover:border-gray-400 rounded-xl py-2 px-5 hover:scale-125 hover:bg-green-400 font-semibold duration-300 hover:text-red-800"
               >
                 Login

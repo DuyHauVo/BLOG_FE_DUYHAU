@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import PrivateRoute from "../client.router/PrivateRoute";
-import Home from "../../pages/client/home/Home";
 import Blog from "../../pages/client/blog/Blog";
 import Contact from "../../pages/client/contact/Contact";
 import About from "../../pages/client/about/About";
+import Home from "../../pages/client/home/Home";
 
 type Routers = {
   id: number | string;
@@ -14,34 +14,34 @@ function Client_routes() {
   const element: Routers[] = [
     {
       id: 1,
-      path: "/",
-      Component: Home,
-    },
-    {
-      id: 2,
-      path: "/blog",
+      path: "blog",
       Component: Blog,
     },
     {
-      id: 3,
-      path: "/contact",
+      id: 2,
+      path: "contact",
       Component: Contact,
     },
     {
-      id: 4,
-      path: "/about",
+      id: 3,
+      path: "about",
       Component: About,
+    },
+    {
+      id: 4,
+      path: "",
+      Component: Home,
     },
   ];
   return (
     <Routes>
-      {element.map((element) => (
+      {element.map(({ id, path, Component }) => (
         <Route
-          key={element.id}
-          path={element.path}
+          key={id}
+          path={path}
           element={
             <PrivateRoute>
-              <element.Component />
+              <Component />
             </PrivateRoute>
           }
         />

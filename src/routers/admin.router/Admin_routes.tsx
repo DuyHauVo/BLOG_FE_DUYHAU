@@ -13,29 +13,29 @@ function Admin_routes() {
   const element: Routers[] = [
     {
       id: 1,
-      path: "/dashboard",
+      path: "dashboard",
       Component: Dashboard,
     },
     {
       id: 2,
-      path: "/user",
+      path: "user",
       Component: Users,
     },
     {
       id: 3,
-      path: "/post",
+      path: "post",
       Component: Posts,
     },
   ];
   return (
     <Routes>
-      {element.map((element) => (
+      {element.map(({ id, path, Component }) => (
         <Route
-          key={element.id}
-          path={element.path}
+          key={id}
+          path={path}
           element={
             <PrivateRoute>
-              <element.Component />
+              <Component />
             </PrivateRoute>
           }
         />

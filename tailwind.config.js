@@ -5,8 +5,10 @@ module.exports = {
     extend: {
       fontFamily: {
         playwrite: ['"Playwrite PL"', "cursive"],
+        playwrite: ['"Playfair Display"', "serif"],
+        dancing: ['"Dancing Script"', "cursive"],
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar-hide")],
 };

@@ -1,7 +1,7 @@
 import Admin_routes from "../../../routers/admin.router/Admin_routes";
 import Header from "../layouts/Header";
 
-function Home() {
+function Home_Admin() {
   return (
     <div>
       <Header />
@@ -12,4 +12,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Home_Admin;

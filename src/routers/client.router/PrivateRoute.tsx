@@ -1,14 +1,22 @@
 // src/components/PrivateRoute.tsx
 import { Navigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../context/authContext/AuthContext";
+// đường dẫn tuỳ cấu trúc bạn
 
 type Props = {
   children: React.ReactNode;
 };
 
 const PrivateRoute = ({ children }: Props) => {
-  const token = localStorage.getItem("token");
+  const context = useContext(AuthContext);
 
-  if (!token) {
+  // Nếu context chưa khởi tạo (có thể do chưa bọc Provider), fallback về /login
+  if (!context) return <Navigate to="/login" replace />;
+
+  const { auth } = context;
+
+  if (!auth?.token) {
     return <Navigate to="/login" replace />;
   }
 

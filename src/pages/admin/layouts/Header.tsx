@@ -1,10 +1,19 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { menu_admin } from "../../../utills/contants";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../context/authContext/AuthContext";
+const avatar: string =
+  "https://scontent.fdad3-4.fna.fbcdn.net/v/t39.30808-6/481662629_2103594593422935_2205736425749827801_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeFEFMpekm4veVDh7AiClMCRLMmhcyMX4U4syaFzIxfhTpIdkFYO2EPhuxAX_ciA5wT_xGxdP0Yq4wXWLbDmx5Go&_nc_ohc=xEmsI62IZhEQ7kNvwHUlZpD&_nc_oc=AdlgrWP2SQaAukU1wi_Ys2wOQ0A3W-sJDOSieiNYuzaeTgYG5_9tuiRpoGVI44d6RcQ&_nc_zt=23&_nc_ht=scontent.fdad3-4.fna&_nc_gid=agR_DjpxDYR6sOqzDmYVxA&oh=00_AfTntYk8zwd5P15pxGJYHkBDkIIdkTegtAXV1keu11EvKQ&oe=6888050B";
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  const [Open, setOpen] = useState<boolean>(false);
 
+  const AuthType = useContext(AuthContext);
+  if (!AuthType) {
+    return null;
+  }
+  const { logout } = AuthType;
   return (
     <div
       className="px-8 py-6 flex items-center justify-between flex-wrap relative z-10"
@@ -45,11 +54,33 @@ function Header() {
             )
           )}
         </ul>
-        <img
-          className="aspect-square h-[64px] object-cover rounded-md shadow-md transition-shadow duration-300 hover:shadow-[0_0_10px_8px_rgba(239,68,68,0.4)]"
-          src="https://scontent.fdad3-4.fna.fbcdn.net/v/t39.30808-6/481662629_2103594593422935_2205736425749827801_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeFEFMpekm4veVDh7AiClMCRLMmhcyMX4U4syaFzIxfhTpIdkFYO2EPhuxAX_ciA5wT_xGxdP0Yq4wXWLbDmx5Go&_nc_ohc=xEmsI62IZhEQ7kNvwHUlZpD&_nc_oc=AdlgrWP2SQaAukU1wi_Ys2wOQ0A3W-sJDOSieiNYuzaeTgYG5_9tuiRpoGVI44d6RcQ&_nc_zt=23&_nc_ht=scontent.fdad3-4.fna&_nc_gid=agR_DjpxDYR6sOqzDmYVxA&oh=00_AfTntYk8zwd5P15pxGJYHkBDkIIdkTegtAXV1keu11EvKQ&oe=6888050B"
-          alt="Avatar"
-        />
+        <div className="relative inline-block text-left">
+          <img
+            className="aspect-square h-[64px] w-[64px] object-cover rounded-md shadow-md cursor-pointer transition-shadow duration-300 hover:shadow-[0_0_10px_8px_rgba(239,68,68,0.4)]"
+            src={avatar}
+            alt="Avatar"
+            onClick={() => setOpen((prep) => !prep)}
+          />
+
+          {Open && (
+            <div className="absolute right-0 mt-2 w-40 origin-top-right bg-white border border-gray-200 rounded-md shadow-lg z-10">
+              <div className="py-1">
+                <button
+                  className="w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  onClick={() => alert("Go to settings")}
+                >
+                  Settings
+                </button>
+                <button
+                  className="w-full px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+                  onClick={logout}
+                >
+                  Logout
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Hamburger icon - chỉ hiện ở mobile/tablet */}
@@ -94,7 +125,7 @@ function Header() {
           <div className="pt-4 border-t">
             <img
               className="aspect-square  object-cover rounded-md shadow-md transition-shadow duration-300 hover:shadow-[0_0_10px_8px_rgba(239,68,68,0.4)] mx-auto"
-              src="https://scontent.fdad3-4.fna.fbcdn.net/v/t39.30808-6/481662629_2103594593422935_2205736425749827801_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeFEFMpekm4veVDh7AiClMCRLMmhcyMX4U4syaFzIxfhTpIdkFYO2EPhuxAX_ciA5wT_xGxdP0Yq4wXWLbDmx5Go&_nc_ohc=xEmsI62IZhEQ7kNvwHUlZpD&_nc_oc=AdlgrWP2SQaAukU1wi_Ys2wOQ0A3W-sJDOSieiNYuzaeTgYG5_9tuiRpoGVI44d6RcQ&_nc_zt=23&_nc_ht=scontent.fdad3-4.fna&_nc_gid=agR_DjpxDYR6sOqzDmYVxA&oh=00_AfTntYk8zwd5P15pxGJYHkBDkIIdkTegtAXV1keu11EvKQ&oe=6888050B"
+              src={avatar}
               alt="Avatar"
             />
           </div>

@@ -1,4 +1,14 @@
+import { useContext } from "react";
+import { AuthContext } from "../context/authContext/AuthContext";
+
 function Header() {
+  const AuthType = useContext(AuthContext);
+  if (!AuthType) {
+    return null;
+  }
+
+  const { logout } = AuthType;
+
   return (
     <div className="flex justify-between px-5 items-center p-5">
       <div className="flex gap-5 text-lg">
@@ -19,7 +29,7 @@ function Header() {
         >
           <i className="fa-solid fa-magnifying-glass"></i>
         </button>
-        <div className="p-5">
+        <div className="p-5" onClick={logout}>
           <i className="fa-solid fa-right-from-bracket text-2xl text-black transition-all duration-300 hover:text-white hover:drop-shadow-[0_0_5px_black]"></i>
         </div>
       </div>

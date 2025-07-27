@@ -24,12 +24,15 @@ interface AuthProp {
 
 export const AuthProvider = ({ children }: AuthProp) => {
   const [auth, setAuth] = useState<AuthData | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+
   // Lấy từ localStorage khi load lại trang
   useEffect(() => {
     const stored = localStorage.getItem("auth");
     if (stored) {
       setAuth(JSON.parse(stored));
     }
+    setLoading(false);
   }, []);
 
   // Hàm login: gọi API và lưu vào local
@@ -39,7 +42,6 @@ export const AuthProvider = ({ children }: AuthProp) => {
         email,
         password,
       });
-
       const datas = {
         token: res.data.access_token,
         userId: res.data.user_ID,
@@ -57,6 +59,9 @@ export const AuthProvider = ({ children }: AuthProp) => {
   };
 
   const getAccess_Token = () => auth?.token || null;
+
+  if (loading) return null;
+
   return (
     <AuthContext.Provider value={{ auth, login, logout, getAccess_Token }}>
       {children}

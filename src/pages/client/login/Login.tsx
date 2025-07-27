@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../context/authContext/AuthContext";
+import { useNotification } from "../../../context/layoutContext/Alerts";
 
 function Login() {
   interface AuthInput {
@@ -8,15 +9,17 @@ function Login() {
     password: string;
   }
 
+  const navigate = useNavigate();
   const [auth, setAuth] = useState<AuthInput>({
     email: "",
     password: "",
   });
+
+  const Alertsnew = useNotification();
   const AuthType = useContext(AuthContext);
   if (!AuthType) {
     return null;
   }
-  console.log(AuthType);
 
   const { login } = AuthType;
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -30,9 +33,22 @@ function Login() {
     e.preventDefault();
     try {
       await login(auth.email, auth.password);
-      alert("Đăng nhập thành công");
+
+      const roles = localStorage.getItem("auth");
+      const authData = JSON.parse(roles!);
+      roles ? authData.role : "";
+      console.log(authData.role);
+
+      setTimeout(() => {
+        if (authData.role == "ADMIN") {
+          navigate("/admin");
+        } else {
+          navigate("/client");
+        }
+        Alertsnew("Đăng nhập thành công!", "success");
+      }, 0);
     } catch (err) {
-      alert("Sai tài khoản hoặc mật khẩu");
+      Alertsnew("Đăng nhập KO thành công!", "error");
     }
   };
 
