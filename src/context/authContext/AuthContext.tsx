@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }: AuthProp) => {
   // Hàm login: gọi API và lưu vào local
   const login = async (email: string, password: string) => {
     try {
-      const res = await axios.post("http://localhost:7777/api/auths/login", {
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7777'}/api/auths/login`, {
         email,
         password,
       });
@@ -62,7 +62,7 @@ export const AuthProvider = ({ children }: AuthProp) => {
   // Hàm register: gọi API và lưu vào local
   const register = async (data: interRegister) => {
     try {
-      const res = await axios.post(`http://localhost:7777/api/auths/register`, {
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7777'}/api/auths/register`, {
         email: data.email,
         name: data.name,
         password: data.password,

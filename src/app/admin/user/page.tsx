@@ -87,7 +87,7 @@ function Users() {
   const getAllUser = async () => {
     try {
       const responsive = await axios.get<UserResponse>(
-        `http://localhost:7777/api/users/?name=${search}&Page=${page}&currenPage=${limit}`
+        `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7777'}/api/users/?name=${search}&Page=${page}&currenPage=${limit}`
       );
       setListUsers(responsive.data.results);
       setTotalPages(responsive.data.TotalPages);
@@ -129,7 +129,7 @@ function Users() {
           image: form.image,
           ...(form.password ? { password: form.password } : {}),
         };
-        await axios.patch(`http://localhost:7777/api/users/?id=${form._id}`, payload, {
+        await axios.patch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7777'}/api/users/?id=${form._id}`, payload, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -137,7 +137,7 @@ function Users() {
         alerts("Cập nhật user thành công!", "success");
       } else {
         // Create user
-        await axios.post("http://localhost:7777/api/users/", form, {
+        await axios.post(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7777'}/api/users/`, form, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -156,7 +156,7 @@ function Users() {
   const handleDelete = async () => {
     if (!dele) return;
     try {
-      await axios.delete(`http://localhost:7777/api/users/${dele}`, {
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7777'}/api/users/${dele}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

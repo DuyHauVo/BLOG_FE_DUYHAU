@@ -53,7 +53,7 @@ function ActionBar() {
         });
       }
 
-      await axios.post("http://localhost:7777/api/posts/", formData, {
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7777'}/api/posts/`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",

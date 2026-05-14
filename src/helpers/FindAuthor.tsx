@@ -9,7 +9,7 @@ export function FindAuthor({ authorId }: { authorId: string }) {
     const fetchAuthor = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:7777/api/users/show/${authorId}`
+          `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7777'}/api/users/show/${authorId}`
         );
         setAuthor(res.data?.name || "Unknown"); // tùy theo dữ liệu bạn trả về
       } catch (error) {

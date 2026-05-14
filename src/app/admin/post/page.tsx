@@ -82,7 +82,7 @@ function Posts() {
   const getAllPost = async () => {
     try {
       const responsive = await axios.get<PostsResponse>(
-        `http://localhost:7777/api/posts/role?name=${search}&currenPage=${limit}&Page=${page}`, {
+        `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7777'}/api/posts/role?name=${search}&currenPage=${limit}&Page=${page}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -98,7 +98,7 @@ function Posts() {
   const handleDelete = async () => {
     if (!dele) return;
     try {
-      await axios.delete(`http://localhost:7777/api/posts?id=${dele}`, {
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7777'}/api/posts?id=${dele}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -142,7 +142,7 @@ function Posts() {
           content: form.content,
           image: form.image,
         };
-        await axios.patch(`http://localhost:7777/api/posts?id=${form._id}`, payload, {
+        await axios.patch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7777'}/api/posts?id=${form._id}`, payload, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -150,7 +150,7 @@ function Posts() {
         alerts("Cập nhật bài viết thành công!", "success");
       } else {
         // Create post
-        await axios.post("http://localhost:7777/api/posts", form, {
+        await axios.post(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7777'}/api/posts`, form, {
           headers: {
             Authorization: `Bearer ${token}`
           }

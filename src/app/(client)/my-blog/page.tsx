@@ -66,7 +66,7 @@ function MyBlog() {
   }, []);
 
   const getImageUrl = (post: Post) => {
-    const baseUrl = "http://localhost:7777";
+    const baseUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7777'}`;
     let imgPath = "";
 
     if (post.images && post.images.length > 0) {
@@ -93,7 +93,7 @@ function MyBlog() {
       // Cách 1: Thử lấy qua endpoint dành riêng cho User (cần Token)
       try {
         const myPostsRes = await axios.get(
-          "http://localhost:7777/api/posts/my-posts?currenPage=1000&Page=1",
+          `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7777'}/api/posts/my-posts?currenPage=1000&Page=1`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -108,7 +108,7 @@ function MyBlog() {
       if (posts.length === 0 && currentUserId) {
         try {
           const authorPostsRes = await axios.get(
-            `http://localhost:7777/api/posts?currenPage=1000&Page=1&author=${currentUserId}`
+            `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7777'}/api/posts?currenPage=1000&Page=1&author=${currentUserId}`
           );
           const data = authorPostsRes.data;
           posts = Array.isArray(data) ? data : data?.results || [];
@@ -170,7 +170,7 @@ function MyBlog() {
         }
 
         await axios.patch(
-          `http://localhost:7777/api/posts?id=${data._id}`,
+          `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7777'}/api/posts?id=${data._id}`,
           formData,
           {
             headers: {
@@ -194,7 +194,7 @@ function MyBlog() {
   const handleDelete = async () => {
     if (!deleId) return;
     try {
-      await axios.delete(`http://localhost:7777/api/posts?id=${deleId}`, {
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7777'}/api/posts?id=${deleId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       alerts("Post deleted successfully!", "success");

@@ -46,11 +46,11 @@ function About() {
 
       try {
         const [userRes, postsRes] = await Promise.all([
-          axios.get<Account>(`http://localhost:7777/api/users/show/${userId}`, {
+          axios.get<Account>(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7777'}/api/users/show/${userId}`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
           axios.get<{ results: any[]; TotalPages: number }>(
-            `http://localhost:7777/api/posts/my-posts?Page=1&currenPage=1`,
+            `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7777'}/api/posts/my-posts?Page=1&currenPage=1`,
             {
               headers: { Authorization: `Bearer ${token}` },
             },
@@ -101,7 +101,7 @@ function About() {
         payload.image = form.image.trim();
       }
 
-      await axios.patch("http://localhost:7777/api/users/me", payload, {
+      await axios.patch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7777'}/api/users/me`, payload, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

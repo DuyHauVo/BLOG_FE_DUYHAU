@@ -74,7 +74,7 @@ const Blog = () => {
 
   const getAllPost = async () => {
     try {
-      const res = await axios.get<NewPaperReq>("http://localhost:7777/api/posts/");
+      const res = await axios.get<NewPaperReq>(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7777'}/api/posts/`);
       console.log("Danh sách bài viết Trang Blog:", res.data.results);
       setListNewpaper(res.data.results.reverse());
     } catch (error) {
@@ -84,7 +84,7 @@ const Blog = () => {
 
   const getAllUsers = async () => {
     try {
-      const res = await axios.get<UsersReq>("http://localhost:7777/api/users/");
+      const res = await axios.get<UsersReq>(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7777'}/api/users/`);
       setListUsers(res.data.results);
     } catch (error) {
       console.log(error);
@@ -97,7 +97,7 @@ const Blog = () => {
   };
 
   const getImageUrl = (post: newpost) => {
-    const baseUrl = "http://localhost:7777";
+    const baseUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7777'}`;
     let imgPath = "";
 
     if (post.images && post.images.length > 0) {
@@ -150,14 +150,14 @@ const Blog = () => {
       }
 
       if (data._id) {
-        await axios.patch(`http://localhost:7777/api/posts/${data._id}`, formData, {
+        await axios.patch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7777'}/api/posts/${data._id}`, formData, {
           headers: { 
             Authorization: `Bearer ${token}`,
             "Content-Type": "multipart/form-data"
           }
         });
       } else {
-        await axios.post(`http://localhost:7777/api/posts/`, formData, {
+        await axios.post(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7777'}/api/posts/`, formData, {
           headers: { 
             Authorization: `Bearer ${token}`,
             "Content-Type": "multipart/form-data"

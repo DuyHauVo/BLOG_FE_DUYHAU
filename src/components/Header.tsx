@@ -23,7 +23,7 @@ function Header() {
       if (!auth?.userId) return;
 
       try {
-        const res = await axios.get(`http://localhost:7777/api/users/show/${auth.userId}`);
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7777'}/api/users/show/${auth.userId}`);
         if (res.data?.image) {
           setAvatar(res.data.image);
         }

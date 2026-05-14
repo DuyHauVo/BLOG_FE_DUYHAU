@@ -22,7 +22,7 @@ interface TableProps {
 const findAuthor = async (id: string) => {
   try {
     const authorObject = await axios.get(
-      `http://localhost:7777/api/users/show/${id}`
+      `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7777'}/api/users/show/${id}`
     );
     console.log(authorObject);
 

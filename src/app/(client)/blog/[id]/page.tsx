@@ -81,7 +81,7 @@ function BlogDetail() {
           });
         }
 
-        await axios.patch(`http://localhost:7777/api/posts?id=${data._id}`, formData, {
+        await axios.patch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7777'}/api/posts?id=${data._id}`, formData, {
           headers: { 
             Authorization: `Bearer ${token}`,
             "Content-Type": "multipart/form-data"
@@ -99,7 +99,7 @@ function BlogDetail() {
   const handleDelete = async () => {
     if (!deleId) return;
     try {
-      await axios.delete(`http://localhost:7777/api/posts?id=${deleId}`, {
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7777'}/api/posts?id=${deleId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       alerts("Post deleted successfully!", "success");
@@ -120,13 +120,13 @@ function BlogDetail() {
   const fetchData = async () => {
     try {
       // Fetch post details
-      const postRes = await axios.get(`http://localhost:7777/api/posts/${id}`);
+      const postRes = await axios.get(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7777'}/api/posts/${id}`);
       const postData = postRes.data;
       setPost(postData);
 
       // Fetch other posts for the top slider
       try {
-        const othersRes = await axios.get(`http://localhost:7777/api/posts?currenPage=100&Page=1`);
+        const othersRes = await axios.get(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7777'}/api/posts?currenPage=100&Page=1`);
         // Filter out current post
         const filtered = othersRes.data.results.filter((p: Post) => p._id !== id);
         setOtherPosts(filtered);
@@ -137,7 +137,7 @@ function BlogDetail() {
       // Fetch author details
       if (postData?.author) {
         try {
-          const authorRes = await axios.get(`http://localhost:7777/api/users/show/${postData.author}`);
+          const authorRes = await axios.get(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7777'}/api/users/show/${postData.author}`);
           setAuthor(authorRes.data);
         } catch (err) {
           console.error("Failed to fetch author", err);
@@ -157,7 +157,7 @@ function BlogDetail() {
   };
 
   const getImageUrl = (path: string | undefined) => {
-    const baseUrl = "http://localhost:7777";
+    const baseUrl = `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7777'}`;
     if (!path) return "https://images.unsplash.com/photo-1507525428034-b723cf961d3e";
     
     if (path.startsWith("/") || (!path.startsWith("http") && !path.startsWith("https"))) {
