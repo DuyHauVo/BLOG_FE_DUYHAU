@@ -23,7 +23,10 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
   // Safely destructure AuthType
-  const { login, auth: contextAuth } = AuthType || { login: async () => {}, auth: null };
+  const { login, auth: contextAuth } = AuthType || {
+    login: async () => {},
+    auth: null,
+  };
 
   useEffect(() => {
     if (contextAuth) {
@@ -61,15 +64,18 @@ function Login() {
           } else {
             router.push("/");
           }
-          Alertsnew("Đăng nhập thành công!", "success");
+          Alertsnew("Login successful!", "success");
         } else {
-          Alertsnew("Đăng nhập KO thành công!", "error");
+          Alertsnew("Authentication data not found.", "error");
         }
         setIsLoading(false);
       }, 1000);
     } catch (err) {
       setTimeout(() => {
-        Alertsnew("Đăng nhập KO thành công!", "error");
+        Alertsnew(
+          "Login failed. Please check your email or password.",
+          "error",
+        );
         setIsLoading(false);
       }, 1000);
     }
@@ -79,7 +85,9 @@ function Login() {
     return (
       <div className="fixed inset-0 flex flex-col items-center justify-center bg-[#F7F5F0] z-50">
         <div className="w-12 h-12 border-4 border-gray-300 border-t-black rounded-full animate-spin"></div>
-        <p className="mt-4 text-sm font-semibold uppercase tracking-widest text-gray-700">Logging in...</p>
+        <p className="mt-4 text-sm font-semibold uppercase tracking-widest text-gray-700">
+          Logging in...
+        </p>
       </div>
     );
   }
@@ -114,7 +122,7 @@ function Login() {
                   placeholder="Password"
                 />
                 <i
-                  className={`fa-solid ${showPassword ? 'fa-eye-slash' : 'fa-eye'} absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer text-gray-400 hover:text-gray-600 transition-colors z-20`}
+                  className={`fa-solid ${showPassword ? "fa-eye-slash" : "fa-eye"} absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer text-gray-400 hover:text-gray-600 transition-colors z-20`}
                   onClick={() => setShowPassword(!showPassword)}
                 ></i>
               </div>
@@ -187,4 +195,3 @@ function Login() {
 }
 
 export default Login;
-

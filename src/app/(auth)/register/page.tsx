@@ -62,20 +62,20 @@ function Register() {
         if (roles) {
           const authData = JSON.parse(roles);
           if (authData.role !== "ADMIN") {
-            Alertsnew("Đăng nhập thành công!", "success");
+            Alertsnew("Login successful!", "success");
             router.push("/");
           } else {
-            Alertsnew("Đăng nhập KO thành công!", "error");
+            Alertsnew("Login failed!", "error");
           }
         } else {
-          Alertsnew("Đăng nhập KO thành công!", "error");
+          Alertsnew("Authentication data not found.", "error");
         }
         setIsLoading(false);
       }, 1000);
     } catch (error: any) {
       console.error(error);
       setTimeout(() => {
-        Alertsnew("Đăng nhập KO thành công!", "error");
+        Alertsnew("Registration failed. Please try again.", "error");
         setIsLoading(false);
       }, 1000);
     }
