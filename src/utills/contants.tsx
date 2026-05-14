@@ -2,38 +2,34 @@ export const menu_admin = [
   {
     id: 1,
     title: "Dashboards",
-    path: "dashboard",
+    path: "/admin/",
   },
   {
     id: 2,
     title: "Users",
-    path: "user",
+    path: "/admin/user",
   },
   {
     id: 3,
     title: "Posts",
-    path: "post",
+    path: "/admin/post",
   },
 ];
 export const menu_client = [
   {
     id: 1,
     title: "Home",
-    path: "",
+    path: "/",
   },
   {
     id: 2,
     title: "Blog",
-    path: "blog",
+    path: "/blog",
   },
-  {
-    id: 3,
-    title: "About",
-    path: "about",
-  },
+
   {
     id: 4,
     title: "Contact",
-    path: "contact",
+    path: "/contact",
   },
 ];

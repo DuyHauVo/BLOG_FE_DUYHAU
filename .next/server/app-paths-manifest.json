@@ -1,0 +1,7 @@
+{
+  "/(client)/about/page": "app/(client)/about/page.js",
+  "/(client)/my-blog/page": "app/(client)/my-blog/page.js",
+  "/(client)/page": "app/(client)/page.js",
+  "/(client)/blog/page": "app/(client)/blog/page.js",
+  "/(client)/blog/[id]/page": "app/(client)/blog/[id]/page.js"
+}

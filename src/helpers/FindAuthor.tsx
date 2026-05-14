@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -20,5 +21,6 @@ export function FindAuthor({ authorId }: { authorId: string }) {
     fetchAuthor();
   }, [authorId]);
 
-  return <td className="px-6 py-3 text-center">{author}</td>;
+  return <span>{author}</span>;
 }
+

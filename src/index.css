@@ -1,16 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 /* Ẩn scrollbar cho tất cả các trình duyệt phổ biến */
+html,
 body {
   overflow-y: scroll; /* hoặc auto */
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
 
+html::-webkit-scrollbar,
 body::-webkit-scrollbar {
   display: none; /* Chrome, Safari and Opera */
 }
+
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
 html,
 body {
   height: 100%;
