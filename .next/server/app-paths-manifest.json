@@ -1,5 +1,10 @@
 {
   "/(auth)/login/page": "app/(auth)/login/page.js",
-  "/(auth)/register/page": "app/(auth)/register/page.js",
-  "/(client)/page": "app/(client)/page.js"
+  "/(auth)/google-callback/page": "app/(auth)/google-callback/page.js",
+  "/admin/user/page": "app/admin/user/page.js",
+  "/(client)/page": "app/(client)/page.js",
+  "/(client)/about/page": "app/(client)/about/page.js",
+  "/(client)/my-blog/page": "app/(client)/my-blog/page.js",
+  "/(client)/contact/page": "app/(client)/contact/page.js",
+  "/(client)/blog/page": "app/(client)/blog/page.js"
 }

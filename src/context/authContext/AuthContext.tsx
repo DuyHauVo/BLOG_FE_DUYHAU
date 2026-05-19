@@ -12,6 +12,7 @@ interface AuthData {
 // Kiểu context
 interface AuthType {
   auth: AuthData | null;
+  setAuth: (data: AuthData | null) => void;
   login: (email: string, password: string) => Promise<void>;
   register: (data: interRegister) => Promise<void>;
   logout: () => void;
@@ -92,7 +93,7 @@ export const AuthProvider = ({ children }: AuthProp) => {
 
   return (
     <AuthContext.Provider
-      value={{ auth, login, register, logout, getAccess_Token }}
+      value={{ auth, setAuth, login, register, logout, getAccess_Token }}
     >
       {children}
     </AuthContext.Provider>
